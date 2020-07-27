@@ -15,6 +15,26 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   
     <script type="text/babel">
+ 
+        function ScoreBoard(props) {
+                                
+            return (
+                <div id="scoreboard">
+                    <div>Scoreboard</div>
+                    <div id="teamScores">
+                        <div id="homeScore">
+                            <div>Home</div>
+                            <div>{props.homeTeamStats.score}</div>
+                        </div>
+                        <div id="visitingScore">
+                            <div>Visitors</div>
+                            <div>{props.visitingTeamStats.score}</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
         class Game extends React.Component {
             constructor (props) {
                 super (props)
@@ -95,7 +115,9 @@
                                     <strong>Resets:</strong> {this.state.resetCount}
                                 </div>
                                 <button onClick={this.resetHandler}>Reset</button>
-                                <ScoreBoard homeTeam={this.state.homeTeam} visitingTeam={this.state.visitingTeam} homeScore={this.state.HomeTeamStats.score} visitingScore={this.state.VisitingTeamStats.score} />
+                                <ScoreBoard
+                                    homeTeamStats={this.state.HomeTeamStats}
+                                    visitingTeamStats={this.state.VisitingTeamStats} />
                             </div>
                             <div id="team2">
                                 <Team
@@ -129,37 +151,6 @@
             )
         }
 
-        class ScoreBoard extends React.Component {
-            constructor (props) {
-                super(props)
-                this.state = {
-                    homeTeam: props.homeTeam,
-                    homeScore: props.homeScore,
-                    visitingTeam: props.visitingTeam,
-                    visitingScore: props.visitingScore
-                }
-
-            }
-
-            render() {
-                return (
-                    <div id="scoreboard">
-                        <div>Scoreboard</div>
-                        <div>
-                            <div id="homeScore">
-                                <div>{this.state.homeTeam}</div>
-                                <div>{this.state.homeScore}</div>
-                            </div>
-                            <div id="visitingScore">
-                                <div>{this.state.visitingTeam}</div>
-                                <div>{this.state.visitingScore}</div>
-                            </div>
-                        </div>
-                    </div>
-                )
-            }
-        }
-
         class App extends React.Component {
             constructor (props) {
                 super(props)
@@ -176,7 +167,7 @@
                             visitingTeamLogo="./assets/logo2.jfif"
                         />
                         <Game
-                            venue="Antarctic Circle Stadium"
+                            venue="Antarctica"
                             homeTeam="The Kinguins"
                             homeTeamLogo="./assets/logo3.jfif"
                             visitingTeam="The Sea Lions"

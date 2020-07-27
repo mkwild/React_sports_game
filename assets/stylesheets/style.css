@@ -53,11 +53,11 @@ img {
     justify-content: space-around;
     align-items: center;
     height: 250px;
-    width: 100px;
+    width: 200px;
 }
 
 h1 {
-    font-size: 3.1em;
+    font-size: 3em;
 }
 
 h2 {
@@ -88,5 +88,29 @@ button {
     margin-top: 100px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    background-color: whitesmoke;
+    border: 3px double black;
+    border-radius: 3%;
 }
 
+#teamScores {
+    display: flex;
+    justify-content: space-around;
+}
+
+#homeScore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+
+}
+
+#visitingScore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+}
