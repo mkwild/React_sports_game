@@ -6,6 +6,13 @@ body {
     background-position: center;
 }
 
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #main {
     display: flex;
     justify-content: space-around;
@@ -15,14 +22,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    color: rgb(15, 105, 35)
+    color: rgb(15, 105, 35);
+    width: 200px;
 }
 
 #team2 {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    color: rgb(105, 15, 35)
+    color: rgb(105, 15, 35);
+    width: 200px;
 }
 
 img {

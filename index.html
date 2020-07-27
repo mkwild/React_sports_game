@@ -22,19 +22,31 @@
                     name: this.props.name,
                     logo: this.props.logo,
                     shotsTaken: 0,
-                    score: 0
+                    score: 0,
+                    shotPercentage: 100,
+                    hasShot: false
                 }
             }
 
             shoot = (event) => {
+                let scoreAudio = new Audio("./assets/score.wav")
+                let missAudio = new Audio("./assets/miss.wav")
                 this.setState((state, props) => ({
                     shotsTaken: state.shotsTaken + 1
                 }))
                 if(Math.random() >= 0.5) {
+                    scoreAudio.play()
                     this.setState((state, props) => ({
                         score: state.score + 1
                     }))
                 }
+                else {
+                    missAudio.play()
+                }
+                this.setState((state, props) => ({
+                    shotPercentage: Math.round((state.score / state.shotsTaken) * 100),
+                    hasShot: true
+                }))
 
             }
 
@@ -45,6 +57,7 @@
                         <h3>{this.state.name}</h3>
                         <br />
                         <p>Shots Taken: {this.state.shotsTaken}</p>
+                        <p style={{visibility: this.state.hasShot ? "visible" : "hidden"}}>Shot Percentage: %{this.state.shotPercentage}</p>
                         <br />
                         <p>Score: {this.state.score}</p>
                         <br />
@@ -54,8 +67,30 @@
             }
         }
 
+        class Game extends React.Component {
+            constructor (props) {
+                super (props)
+                this.state = {
+                    venue: this.props.venue
+                }
+            }
 
-
+            render() {
+                return (
+                    <div>
+                        <h1>Welcome to {this.state.venue}!</h1>
+                        <div id="main">
+                            <div id="team1">
+                                <Team name="Home" logo="./assets/logo1.png" />
+                            </div>
+                            <div id="team2">
+                                <Team name="Visitor" logo="./assets/logo2.jfif" />
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        }
 
         class App extends React.Component {
             constructor (props) {
@@ -64,13 +99,8 @@
 
             render() {
                 return (
-                    <div id="main">
-                        <div id="team1">
-                            <Team name="Home" logo="./assets/logo1.png" />
-                        </div>
-                        <div id="team2">
-                            <Team name="Visitor" logo="./assets/logo2.jfif" />
-                        </div>
+                    <div>
+                        <Game venue="The Moon" />
                     </div>
                 )
             }
