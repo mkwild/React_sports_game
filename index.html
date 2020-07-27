@@ -78,7 +78,7 @@
 
             render(props) {
                 return (
-                    <div>
+                    <div id="game">
                         <h1>Welcome to {this.state.venue}!</h1>
                         <div id="main">
                             <div id="team1">
@@ -94,7 +94,8 @@
                                 <div>
                                     <strong>Resets:</strong> {this.state.resetCount}
                                 </div>
-                                <button onClick={this.resetHandler}>Reset Game</button>
+                                <button onClick={this.resetHandler}>Reset</button>
+                                <ScoreBoard homeTeam={this.state.homeTeam} visitingTeam={this.state.visitingTeam} homeScore={this.state.HomeTeamStats.score} visitingScore={this.state.VisitingTeamStats.score} />
                             </div>
                             <div id="team2">
                                 <Team
@@ -105,6 +106,7 @@
                                 />
                             </div>
                         </div>
+                        <div id="empty"></div>
                     </div>
                 )
             }
@@ -115,7 +117,7 @@
             return(
                 <div className="team">
                     <img src={props.logo} alt={props.name} height="100px" width="100px" />
-                    <h3>{props.name}</h3>
+                    <h2>{props.name}</h2>
                     <br />
                     <p>Shots Taken: {props.stats.shots}</p>
                     <p style={{visibility: props.stats.hasShot ? "visible" : "hidden"}}>Shot Percentage: %{Math.round((props.stats.score / props.stats.shots)*100)}</p>
@@ -125,6 +127,37 @@
                     <button onClick={props.shotHandler}>Shoot</button>
                 </div>
             )
+        }
+
+        class ScoreBoard extends React.Component {
+            constructor (props) {
+                super(props)
+                this.state = {
+                    homeTeam: props.homeTeam,
+                    homeScore: props.homeScore,
+                    visitingTeam: props.visitingTeam,
+                    visitingScore: props.visitingScore
+                }
+
+            }
+
+            render() {
+                return (
+                    <div id="scoreboard">
+                        <div>Scoreboard</div>
+                        <div>
+                            <div id="homeScore">
+                                <div>{this.state.homeTeam}</div>
+                                <div>{this.state.homeScore}</div>
+                            </div>
+                            <div id="visitingScore">
+                                <div>{this.state.visitingTeam}</div>
+                                <div>{this.state.visitingScore}</div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
         }
 
         class App extends React.Component {
