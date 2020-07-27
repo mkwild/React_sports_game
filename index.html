@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Sports</title>
+    <link rel="stylesheet" href="./assets/stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Rose:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  
+    <script type="text/babel">
+        class Team extends React.Component {
+            constructor (props) {
+                super(props)
+                this.state = {
+                    name: this.props.name,
+                    logo: this.props.logo,
+                    shotsTaken: 0,
+                    score: 0
+                }
+            }
+
+            shoot = (event) => {
+                this.setState((state, props) => ({
+                    shotsTaken: state.shotsTaken + 1
+                }))
+                if(Math.random() >= 0.5) {
+                    this.setState((state, props) => ({
+                        score: state.score + 1
+                    }))
+                }
+
+            }
+
+            render() {
+                return(
+                    <div>
+                        <img src={this.state.logo} alt={this.state.name} height="100px" width="100px" />
+                        <h3>{this.state.name}</h3>
+                        <br />
+                        <p>Shots Taken: {this.state.shotsTaken}</p>
+                        <br />
+                        <p>Score: {this.state.score}</p>
+                        <br />
+                        <button onClick={this.shoot}>Shoot</button>
+                    </div>
+                )
+            }
+        }
+
+
+
+
+        class App extends React.Component {
+            constructor (props) {
+                super(props)
+            }
+
+            render() {
+                return (
+                    <div id="main">
+                        <div id="team1">
+                            <Team name="Home" logo="./assets/logo1.png" />
+                        </div>
+                        <div id="team2">
+                            <Team name="Visitor" logo="./assets/logo2.jfif" />
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <App />,
+            root
+        )
+
+    </script>
+</body>
+</html>
